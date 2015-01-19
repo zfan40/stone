@@ -1,0 +1,19 @@
+{
+  "name": "Stone",
+  "version": "0.0.0",
+  "dependencies": {
+    "angular": "latest",
+    "angular-route": "latest",
+    "jquery": "latest",
+    "bootstrap": "latest",
+    "spectrum": "latest"
+  },
+  "authors": [
+    "Ziwen Fan <fanatic224@gmail.com>"
+  ],
+  "description": "stone site",
+  "license": "MIT",
+  "devDependencies": {
+    "spectrum": "*"
+  }
+}

@@ -1,0 +1,10 @@
+<h1>Pets</h1>
+
+<ul>
+    <li ng-repeat="pet in pets">
+        <a href="#/pet/{{ pet.id }}">
+            <h4>{{ pet.title }}</h4>
+            <p>{{ pet.description }}</p>
+        </a>
+    </li>
+</ul>
