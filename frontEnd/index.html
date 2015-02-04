@@ -1,41 +1,10 @@
 <!DOCTYPE html>
 <html>
   <head>
-  <style>
-      .beauty { 
-      background: url(images/stonebackground1.jpg) no-repeat center center fixed; 
-      -webkit-background-size: cover;
-      -moz-background-size: cover;
-      -o-background-size: cover;
-      background-size: cover;
-    }
-
-    .elem {
-      position:relative;
-      margin-top:40%;
-      transform: translateY(-50%);
-    }
-    .center {
-      position:relative;
-      text-align: center;
-    }
-
-    .entry {
-      margin: 50px,30px,50px,30px;
-    }
-  </style>
   <meta content="石动,石动网,石动平台,石洞, 石洞网 ,石洞平台,互联网石材,石材平台,石材网站,石材公司,石材供应商,石材设计师,建筑商,B2B石材,石材合作,钢筋混凝土,大理石,金刚石" name="keywords">
   <meta content="石动网是一切石材相关的垂直网络平台,石材选择,石材设计等一切商机尽在石动网" name="description">
   <link rel="Shortcut Icon" href="images/favicon.ico">
   
-  <style type="text/css">
-@media only screen and (max-width : 768px) {
-    .navbar-brand {
-     float:none !important;
-     text-align:center; 
-  }
-}
-  </style>
     <meta charset="utf-8">
     <title>My App</title>
     <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no">
@@ -49,12 +18,12 @@
     <!-- <button class='button' ng-if='isLoggedIn()' ng-click="logoutUser()">Logout</button> -->
 
     <ng-view></ng-view>
-
+    <link rel="stylesheet" type="text/css" href="app/css/main.css">
     <link href="app/bower_components/font-awesome/css/font-awesome.min.css" rel="stylesheet">
     <link href="app/bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="app/bower_components/spectrum/spectrum.css" rel="stylesheet">
-    <script src="app/bower_components/angular/angular.js"></script>
-    <script src="app/bower_components/angular-route/angular-route.js"></script>
+    <script src="app/bower_components/angular/angular.min.js"></script>
+    <script src="app/bower_components/angular-route/angular-route.min.js"></script>
     <script src="app/bower_components/jquery/dist/jquery.min.js"></script>
     <script src="app/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
     <script src="app/bower_components/spectrum/spectrum.js"></script>
@@ -66,8 +35,9 @@
     
     <!-- General controllers -->
     <script src="app/controllers/mainpage.js"></script>
-    <script src="app/controllers/searchstone.js"></script>
-    
+    <script src="app/controllers/searchInventory.js"></script>
+    <script src="app/controllers/showCompanyController.js"></script>
+    <script src="app/controllers/showInventoryController.js"></script>
     <!-- directives/view components -->
     <script src="app/directives/nav/nav.js"></script>
     <script src="app/directives/carouselad/carouselad.js"></script>

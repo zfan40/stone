@@ -1,0 +1,74 @@
+<nav-bar></nav-bar>
+<div class = "form-inline container">
+<!-- input-group margin-bottom-sm-->
+	<div class = "row">
+		<div class="col-xs-6 col-sm-4 col-md-3">
+		别名/编号</br><input ng-model="stoneCode" ngclass="form-control" type="text" id="stone_code">
+		</div>
+
+		<div class="col-xs-6 col-sm-4 col-md-3">
+		主要颜色</br><input ng-model="mainColor" class="form-control" type="text" id="maincolor">	
+		</div>
+
+		<div class="col-xs-6 col-sm-4 col-md-3">
+		纹理颜色</br><input ng-model="veinColor" class="form-control" type="text" id="deccolor">	
+		</div>
+
+		<div class="col-xs-6 col-sm-4 col-md-3">
+		  <label for="originprovince">产地</label></br>
+		  <select ng-model="originLocation" ng-options="loc for loc in originOptions" class="form-control" id="originprovince"></select>
+		</div>
+	</div>
+
+
+	<div class="row">
+		<div class="col-xs-6 col-sm-4 col-md-3">
+		<label for="senderprovince">发货地</label></br>
+		  <select ng-model="shipLocation" ng-options="loc for loc in shipOptions" class="form-control" id="senderprovince"></select>
+		</div>
+
+
+
+		<div class="col-xs-6 col-sm-4 col-md-3">
+		价格区间</br><input ng-model="price" type="text" id="deccolor">~<input type="text" id="deccolor">	
+		</div>
+
+		<div class="col-xs-6 col-sm-4 col-md-3">
+		库存量</br><input type="text" id="deccolor">~<input type="text" id="deccolor">	
+		</div>
+		<div class="col-xs-6 col-sm-4 col-md-3">
+		<label for="senderprovince">规格</label></br>
+		  <select class="form-control" id="senderprovince">
+		    <option></option>
+		    <option>15*3</option>
+		    <option>15*2</option>
+		    <option>15*5</option>
+		    <option>raw</option>
+		  </select>
+		</div>
+	</div>
+
+	<div class="container">
+	<div class="col-xs-12">
+		<table class="table table-bordered inventory-table">
+			<tr>
+				<th>板图</th>
+				<th>名称</th>
+				<th>种类</th>
+				<th>产地</th>
+				<th>规格</th>
+				<th>价格</th>
+			</tr>
+			<tr ng-repeat="inventory in inventories">
+				<td><a href={{'#/inventory/'+inventory.inventoryId}}><img class="inventory" ng-src={{inventory.stoneImageUrl}}></a></td>
+				<td>{{inventory.fullName}}</td>
+				<td>{{inventory.stoneCategory}}</td>
+				<td>{{inventory.shipLocation}}</td>
+				<td>{{inventory.standard}}</td>
+				<td>{{inventory.price}}</td>
+			</tr>	
+		</table>
+	</div>
+</div>
+
+</div>

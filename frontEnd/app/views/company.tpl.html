@@ -1,0 +1,129 @@
+<nav-bar></nav-bar>
+<div class = "container">
+	<div class = "row">
+		<div class="col-xs-12 col-sm-4">
+			<img ng-src={{logoUrl}} class="img-responsive logo">
+		</div>
+		<div class="col-xs-12 col-sm-8">
+			<a href={{website}}><h3>{{translatedAlias}}</h3></a>
+			<h4>{{fullName}}</h4>
+			<p>{{companyDescription}}</p>
+			<ul class="clearfix companyTag">
+				<li ng-repeat="category in categories">
+					{{category}}
+				</li>
+			</ul>
+		</div>
+		<!-- <p>{{abc}}</p> -->
+	</div>
+
+	<div class="description row">
+		<div class="col-xs-12 col-sm-8">
+			<h3 class="title">公司介绍</h3>
+			<p class="companyInfo">{{companyDetail}}</p>
+		</div>
+		<div class="col-xs-12 col-sm-4">
+			<h3 class="title">其他信息</h3>
+			<table class="table table-bordered companyOtherInfo">
+				<tr>
+					<td>地点</td>
+					<td>{{nation + ' ' + ' ' + state}}</td>
+				</tr>
+				<tr>
+					<td>规模</td>
+					<td>{{employeeAmount}}人</td>
+				</tr>
+				<tr>
+					<td>成立时间</td>
+					<td>{{foundDate}}</td>
+				</tr>
+				<tr>
+					<td>联系人</td>
+					<td>{{contactPerson}}</td>
+				</tr>
+				<tr>
+					<td>联系电话</td>
+					<td>{{contactNumber}}</td>
+				</tr>
+			</table>
+		</div>
+	</div>
+	
+<!-- 	<div class="row">
+		<div class="col-xs-2">
+			板图
+		</div>
+		<div class="col-xs-2">
+			名称
+		</div>
+		<div class="col-xs-2">
+			种类
+		</div>
+		<div class="col-xs-2">
+			产地
+		</div>
+		<div class="col-xs-2">
+			规格
+		</div>
+		<div class="col-xs-2">
+			价格
+		</div>
+	</div>
+
+	<div class="row" ng-repeat="inventory in inventories">
+		<div class="col-xs-2">
+			<img class="inventory" ng-src={{inventory.stoneImageUrl}}>
+		</div>
+		<div class="col-xs-2">
+			{{inventory.fullName}}
+		</div>
+		<div class="col-xs-2">
+			{{inventory.stoneCategory}}
+		</div>
+		<div class="col-xs-2">
+			{{inventory.shipLocation}}
+		</div>
+		<div class="col-xs-2">
+			{{inventory.standard}}
+		</div>
+		<div class="col-xs-2">
+			{{inventory.price}}
+		</div>
+	</div> -->
+	<div class="col-xs-12">
+		<h3 class="title">现货信息</h3>
+		<table class="table table-bordered inventory-table">
+			<tr>
+				<th>板图</th>
+				<th>名称</th>
+				<th>种类</th>
+				<th>产地</th>
+				<th>规格</th>
+				<th>价格</th>
+			</tr>
+			<tr ng-repeat="inventory in inventories">
+				<td><a href={{'#/inventory/'+inventory.inventoryId}}><img class="inventory" ng-src={{inventory.stoneImageUrl}}></a></td>
+				<td>{{inventory.fullName}}</td>
+				<td>{{inventory.stoneCategory}}</td>
+				<td>{{inventory.shipLocation}}</td>
+				<td>{{inventory.standard}}</td>
+				<td>{{inventory.price}}</td>
+			</tr>	
+		</table>
+	</div>
+
+<!-- 
+			fullName:'黄金钻',
+			stoneCategory:'花岗岩',
+			shipLocation:'新疆',
+			standard:'50*2',
+			storage:'5吨',
+			price:'10w',
+			stoneCode:'NB001' -->
+	
+	<div>
+		<carousel-ad interval="500" image-list="caseShow"></carousel-ad>
+	</div>
+</div>
+
+

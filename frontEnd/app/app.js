@@ -28,15 +28,19 @@ angular.module('app', [
             })
 
             .when('/find', {
-                templateUrl: 'app/views/searchstone.tpl.html',
-                controller: 'SearchStoneController',
+                templateUrl: 'app/views/searchInventory.tpl.html',
+                controller: 'SearchInventoryController',
                 requireLogin: false
             })
-
-            .when('/pet/:petId', {
-                templateUrl: 'app/pets/pet/pet.tpl.html',
-                controller: 'PetCtrl',
-                requireLogin: true
+            .when('/company/:companyId', {
+                templateUrl: 'app/views/company.tpl.html',
+                controller: 'ShowCompanyController',
+                requireLogin: false
+            })
+            .when('/inventory/:inventoryId', {
+                templateUrl: 'app/views/stone.tpl.html',
+                controller: 'ShowInventoryController',
+                requireLogin: false
             });
 
         // If the url is unrecognized go to login

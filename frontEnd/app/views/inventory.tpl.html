@@ -1,0 +1,22 @@
+<div class="container">
+	<div class="col-xs-12">
+		<table class="table table-bordered inventory-table">
+			<tr>
+				<th>板图</th>
+				<th>名称</th>
+				<th>种类</th>
+				<th>产地</th>
+				<th>规格</th>
+				<th>价格</th>
+			</tr>
+			<tr ng-repeat="inventory in inventories">
+				<td><a href={{'#/inventory/'+inventory.inventoryId}}><img class="inventory" ng-src={{inventory.stoneImageUrl}}></a></td>
+				<td>{{inventory.fullName}}</td>
+				<td>{{inventory.stoneCategory}}</td>
+				<td>{{inventory.shipLocation}}</td>
+				<td>{{inventory.standard}}</td>
+				<td>{{inventory.price}}</td>
+			</tr>	
+		</table>
+	</div>
+</div>
