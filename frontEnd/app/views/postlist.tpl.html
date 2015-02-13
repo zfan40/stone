@@ -1,0 +1,31 @@
+<nav-bar></nav-bar>
+<div class="container">
+	<div class="row">
+			<div class="col-xs-12 col-sm-6  col-md-4 " ng-repeat="post in postList" style="padding-left:20px; padding-right:20px;margin-top:20px;">
+
+				<article ng-class="{'category-artists': post.postTypeId==1, 'category-news': post.postTypeId==2,'category-stones': post.postTypeId==3}">
+					<div class="article-wrapper">
+						<div class="article-image" ng-show="post.postImage">
+							<a href="/en/blog/seekae-beating-the-worry/">
+								<img class="lazy" ng-src={{post.postImage}} style="display: inline;">
+							</a>
+						</div>
+						<div class="article-content">
+							<div class="background"></div>
+							<div class="overlay"></div>
+							<a href="/en/blog/categories/artists/" rel="tag category" title="View posts in Artists"><p class="posttype"><u>{{post.postType}}</u></p></a>
+		            		<a href="/en/blog/seekae-beating-the-worry/"><p class="posttitle">{{post.postTitle}}</p></a>
+		            		<p class="postdate">{{post.postDate}}</p>
+					        <p class="postabstract">{{post.postAbstract}}</p>
+
+
+	          			</div>
+          			</div>
+          		</article>
+
+			</div>
+		</div>
+
+		<!-- <div class="clearfix visible-xs-block"></div> -->
+	</div>
+</div>

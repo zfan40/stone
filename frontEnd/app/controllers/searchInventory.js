@@ -9,7 +9,7 @@
 
 
 		$scope.stoneCode;
-		$scope.name;
+		$scope.stoneName;
 		$scope.stoneCategory;
 			$scope.categoryOptions = ['哎呀','好意思','不好意思'];
 		$scope.originLocation;
@@ -19,8 +19,11 @@
 		$scope.shipLocation;
 			$scope.shipOptions = ['北京','上海','深圳','东莞'];
 		$scope.standard;
-		$scope.storage;
-		$scope.price;
+			$scope.standardOptions = ['50*2','51*2','50*3','51*3','原料'];
+		$scope.storagemin;
+		$scope.storagemax;
+		$scope.pricemin;
+		$scope.pricemax;
 		$scope.page = 1;
 
 		//returned example

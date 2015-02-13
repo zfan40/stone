@@ -1,50 +1,49 @@
 <nav-bar></nav-bar>
-<div class = "form-inline container">
+<div class = "form-inline container searchInvenotry">
 <!-- input-group margin-bottom-sm-->
 	<div class = "row">
-		<div class="col-xs-6 col-sm-4 col-md-3">
-		别名/编号</br><input ng-model="stoneCode" ngclass="form-control" type="text" id="stone_code">
+		<div class="col-xs-6 col-sm-4 col-md-2">
+		编号</br><input ng-model="stoneCode" ngclass="form-control" type="text" id="stone_code">
 		</div>
 
-		<div class="col-xs-6 col-sm-4 col-md-3">
+		<div class="col-xs-6 col-sm-4 col-md-2">
+		商品名</br><input ng-model="stoneName" ngclass="form-control" type="text" id="stone_code">
+		</div>
+
+		<div class="col-xs-6 col-sm-4 col-md-2">
 		主要颜色</br><input ng-model="mainColor" class="form-control" type="text" id="maincolor">	
 		</div>
 
-		<div class="col-xs-6 col-sm-4 col-md-3">
+		<div class="col-xs-6 col-sm-4 col-md-2">
 		纹理颜色</br><input ng-model="veinColor" class="form-control" type="text" id="deccolor">	
 		</div>
 
-		<div class="col-xs-6 col-sm-4 col-md-3">
+		<div class="col-xs-6 col-sm-4 col-md-2">
 		  <label for="originprovince">产地</label></br>
 		  <select ng-model="originLocation" ng-options="loc for loc in originOptions" class="form-control" id="originprovince"></select>
+		</div>
+		<div class="col-xs-6 col-sm-4 col-md-2">
+		<label for="senderprovince">发货地</label></br>
+		  <select ng-model="shipLocation" ng-options="loc for loc in shipOptions" class="form-control" id="senderprovince"></select>
 		</div>
 	</div>
 
 
 	<div class="row">
-		<div class="col-xs-6 col-sm-4 col-md-3">
-		<label for="senderprovince">发货地</label></br>
-		  <select ng-model="shipLocation" ng-options="loc for loc in shipOptions" class="form-control" id="senderprovince"></select>
+
+
+
+
+		<div class="col-xs-6 col-sm-4 col-md-2">
+		价格区间</br><input class="range" ng-model="pricemin" type="text">~<input class="range" ng-model="pricemax" type="text">	
 		</div>
 
-
-
-		<div class="col-xs-6 col-sm-4 col-md-3">
-		价格区间</br><input ng-model="price" type="text" id="deccolor">~<input type="text" id="deccolor">	
+		<div class="col-xs-6 col-sm-4 col-md-2">
+		库存量</br><input class="range" ng-model="storagemin" type="text">~<input class="range" ng-model="storagemax" type="text">	
 		</div>
-
-		<div class="col-xs-6 col-sm-4 col-md-3">
-		库存量</br><input type="text" id="deccolor">~<input type="text" id="deccolor">	
-		</div>
-		<div class="col-xs-6 col-sm-4 col-md-3">
+		<div class="col-xs-6 col-sm-4 col-md-2">
 		<label for="senderprovince">规格</label></br>
-		  <select class="form-control" id="senderprovince">
-		    <option></option>
-		    <option>15*3</option>
-		    <option>15*2</option>
-		    <option>15*5</option>
-		    <option>raw</option>
-		  </select>
+		  <select ng-model="standard" ng-options="opt for opt in standardOptions" class="form-control" id="senderprovince"></select>
 		</div>
 	</div>
 

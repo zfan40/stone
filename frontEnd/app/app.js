@@ -14,16 +14,22 @@ angular.module('app', [
             .when('/login', {
                 templateUrl: 'app/views/login.tpl.html',
                 controller: 'LoginCtrl',
-
-                // You do not need to be logged in to go to this route.
                 requireLogin: false
             })
 
             .when('/main', {
                 templateUrl: 'app/views/main.tpl.html',
                 controller: 'MainPageController',
-
-                // You must be logged into go to this route.
+                requireLogin: false
+            })
+            .when('/collaboration', {
+                templateUrl: 'app/views/companyList.tpl.html',
+                controller: 'CompanyListController',
+                requireLogin: false
+            })
+            .when('/posts', {
+                templateUrl: 'app/views/postList.tpl.html',
+                controller: 'PostListController',
                 requireLogin: false
             })
 
@@ -38,7 +44,7 @@ angular.module('app', [
                 requireLogin: false
             })
             .when('/inventory/:inventoryId', {
-                templateUrl: 'app/views/stone.tpl.html',
+                templateUrl: 'app/views/inventory.tpl.html',
                 controller: 'ShowInventoryController',
                 requireLogin: false
             });

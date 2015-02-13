@@ -43,7 +43,7 @@
 			fullName:'戈壁彩',
 			stoneCategory:'大理石',
 			shipLocation:'新疆',
-			standard:'50*2',
+			standard:'50x2',
 			storage:'5吨',
 			price:'20w',
 			stoneCode:'2B001'
@@ -54,7 +54,7 @@
 			fullName:'黄金钻',
 			stoneCategory:'花岗岩',
 			shipLocation:'新疆',
-			standard:'50*2',
+			standard:'50x2',
 			storage:'5吨',
 			price:'10w',
 			stoneCode:'NB001'
@@ -82,6 +82,6 @@
 			stoneCode:'SB001'
 		}
 	];
-	$scope.caseShow = [{image:'images/case/1.jpg',text:'to be no.1'},{image:'images/case/2.jpg',text:'to be no.2'},{image:'images/case/3.jpg',text:'to be no.3'}];
+	$scope.caseShow = [{image:'images/case/1_1440x1024.jpg',text:'to be no.1'},{image:'images/case/2_1440x1024.jpg',text:'to be no.2'},{image:'images/case/3_1440x1024.jpg',text:'to be no.3'},{image:'images/case/3_1440x1024.jpg',text:'to be no.3'}];
 	}
 })()

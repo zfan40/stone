@@ -1,22 +1,38 @@
+<nav-bar></nav-bar>
 <div class="container">
-	<div class="col-xs-12">
-		<table class="table table-bordered inventory-table">
-			<tr>
-				<th>板图</th>
-				<th>名称</th>
-				<th>种类</th>
-				<th>产地</th>
-				<th>规格</th>
-				<th>价格</th>
-			</tr>
-			<tr ng-repeat="inventory in inventories">
-				<td><a href={{'#/inventory/'+inventory.inventoryId}}><img class="inventory" ng-src={{inventory.stoneImageUrl}}></a></td>
-				<td>{{inventory.fullName}}</td>
-				<td>{{inventory.stoneCategory}}</td>
-				<td>{{inventory.shipLocation}}</td>
-				<td>{{inventory.standard}}</td>
-				<td>{{inventory.price}}</td>
-			</tr>	
-		</table>
+	<h3 class="title">基本信息</h3>
+
+	<div class = "row" style="display:table;">
+
+		<div class="col-xs-12 col-sm-4" style="display:table-cell; vertical-align:middle;padding-top:25px;">
+			<img ng-src={{stoneBoardImageUrl[0].image}} class="img-responsive logo">
+		</div>
+		<div class="col-xs-12 col-sm-8" style="display:table-cell; vertical-align:middle;">		
+			<a href={{website}}><h3>{{translatedAlias}}</h3></a>
+			<h4>{{generalName}}</h4>
+			<p>{{generalDescription}}</p>
+			<p>种类:&nbsp{{stoneCategory}}</p>
+			<p>所属公司:&nbsp{{companyName}}</p>
+			<p>价格(每吨):&nbsp{{price}}</p>
+			<p>产地:&nbsp{{originLocation}}</p>
+			<p>发货地:&nbsp{{shipLocation}}</p>
+		</div>
+		<!-- <p>{{abc}}</p> -->
+	</div>
+
+	<!-- 库存板图 -->
+	<h3 class="title">石板展示</h3>
+	<div>
+		<zoom-show image-list="stoneBoardImageUrl"></zoom-show>	
+	</div>
+	<!-- 库存产品图 -->
+	<h3 class="title">产品展示</h3>
+	<div>
+		<zoom-show image-list="stoneProductImageUrl"></zoom-show>	
+	</div>
+	<!-- 库存案例图 -->
+	<h3 class="title">案例展示</h3>	
+	<div>
+		<carousel-ad interval="3000" image-list="cases"></carousel-ad>
 	</div>
 </div>
