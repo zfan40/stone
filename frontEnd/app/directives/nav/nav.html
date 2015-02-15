@@ -1,15 +1,15 @@
-<section class="navbar navbar-inverse docs-navbar-primary ng-scope" ng-controller="NavDirController" style="text-align:center">
+<section class="navbar navbar-inverse docs-navbar-primary ng-scope" ng-controller="NavDirController" style="text-align:center;">
         <div class="container">
           <div class="row">
             <div class="col-md-9 header-branding" style="min-height: 41px !important;">
               <a class="brand navbar-brand" href="http://angularjs.org">
-                <img width="117" height="30" class="logo" ng-src="images/header.png" src="images/icon.png" style="display:inline; margin-top:-5px;">
+                <img width="117" height="30" class="logo" ng-src="images/header.png" src="images/header.png" style="display:inline; margin-top:-5px;">
               </a>
-              <ul class="nav navbar-nav">
+              <ul class="nav navbar-nav" style=" cursor: pointer; cursor: hand;">
                 <li class="divider-vertical"></li>
-                <li><a href="#/main"><i class="icon-home icon-white"></i> 主页</a></li>
+                <li ng-class="{'active': highlight==1}"><a href="#/main"><i class="icon-home icon-white"></i> 主页</a></li>
                 <li class="divider-vertical"></li>
-                <li class="dropdown ng-isolate-scope">
+                <li class="dropdown ng-isolate-scope" ng-class="{'active': highlight==2}">
                   <a href="#/posts" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     <i class="icon-eye-open icon-white"></i> 资讯 <b class="caret"></b>
                   </a>
@@ -21,21 +21,19 @@
                   </ul>
                 </li>
                 <li class="divider-vertical"></li>
-                <li class="dropdown          active             ng-isolate-scope">
+                <li class="disabled dropdown ng-isolate-scope" ng-class="{'active': highlight==3}">
                   <a class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     <i class="icon-book icon-white"></i> 求货信息
                   </a>
                 </li>
                 <li class="divider-vertical"></li>
-                <li class="dropdown ng-isolate-scope">
+                <li class="dropdown ng-isolate-scope" ng-class="{'active': highlight==4}">
                   <a href="#/find" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    <i class="icon-book icon-white"></i> 石材搜索
-                  </a>
-                </li>
+                    <i class="icon-book icon-white"></i> 石材搜索</a></li>
                 <li class="divider-vertical"></li>
-                <li class="dropdown ng-isolate-scope">
+                <li class="dropdown ng-isolate-scope" ng-class="{'active': highlight==5}">
                   <a class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    <i class="icon-comment icon-white"></i> 合作伙伴 <b class="caret"></b>
+                    <i class="icon-book icon-white"></i> 合作伙伴 <b class="caret"></b>
                   </a>
                   <ul class="dropdown-menu">
                     <li><a href="#/collaboration">供应公司</a></li>
@@ -47,7 +45,7 @@
                 </li>
                 <li class="divider-vertical"></li>
 
-                <li class="dropdown ng-isolate-scope">
+                <li class="dropdown ng-isolate-scope" ng-class="{'active': highlight==6}">
                   <a class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     <i class="icon-comment icon-white"></i> 关于我们
                   </a>

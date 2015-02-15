@@ -6,7 +6,8 @@
     "angular-route": "latest",
     "jquery": "latest",
     "bootstrap": "latest",
-    "spectrum": "latest"
+    "spectrum": "latest",
+    "jquery-ui-bootstrap":"latest"
   },
   "authors": [
     "Ziwen Fan <fanatic224@gmail.com>"

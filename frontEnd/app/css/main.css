@@ -109,6 +109,14 @@ table th{
 }
 
 /*search inventory*/
+input#stone_code {
+    height:34px; 
+    border-radius:4px;
+}
+input#stone_name {
+    height:34px; 
+    border-radius:4px;
+}
 input.range {
 	/*float:left;*/
 	width:50px;

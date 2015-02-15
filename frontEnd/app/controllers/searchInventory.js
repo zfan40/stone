@@ -14,16 +14,18 @@
 			$scope.categoryOptions = ['哎呀','好意思','不好意思'];
 		$scope.originLocation;
 			$scope.originOptions = ['北京','上海','深圳','东莞'];
-		$scope.mainColor;
-		$scope.veinColor;
+		$scope.mainColor=undefined;
+		$scope.veinColor=undefined;
 		$scope.shipLocation;
 			$scope.shipOptions = ['北京','上海','深圳','东莞'];
 		$scope.standard;
 			$scope.standardOptions = ['50*2','51*2','50*3','51*3','原料'];
-		$scope.storagemin;
-		$scope.storagemax;
-		$scope.pricemin;
-		$scope.pricemax;
+		$scope.storagemin=0;
+		$scope.storagemax=1000;
+		$scope.storagetext = '无限制';
+		$scope.pricemin=0;
+		$scope.pricemax=100;
+		$scope.pricetext = '无限制';
 		$scope.page = 1;
 
 		//returned example
@@ -97,6 +99,53 @@
 		});		
 	}
 
+	function initRangeView() {
+
+
+		$('#pricerange').slider({
+    		range: true,
+    		values: [0,100],
+    		slide: function (event, ui) {
+        		$scope.$apply(function(){
+        			console.log(ui.values[0]+' '+ui.values[1]);
+        			$scope.pricemin=ui.values[0];
+        			$scope.pricemax=ui.values[1];
+        			console.log($scope.pricemin+' '+$scope.pricemax);
+        			if ($scope.pricemin == 0 && $scope.pricemax == 100)
+        				$scope.pricetext = '无限制';
+        			else if($scope.pricemin == $scope.pricemax) {
+        				$scope.pricetext = ''+$scope.pricemax+'(万/吨)';
+        			}
+        			else {
+        				$scope.pricetext = ""+$scope.pricemin+' ~ '+$scope.pricemax+'(万/吨)';     				
+        			}
+        			console.log($scope.pricetext);
+        		})
+    		}
+		});
+
+		$('#storagerange').slider({
+    		range: true,
+    		values: [0,1000],
+    		slide: function (event, ui) {
+        		$scope.$apply(function(){
+        			console.log(ui.values[0]+' '+ui.values[1]);
+        			$scope.storagemin=ui.values[0]*10;
+        			$scope.storagemax=ui.values[1]*10;
+        			console.log($scope.storagemin+' '+$scope.storagemax);
+        			if ($scope.storagemin == 0 && $scope.storagemax == 1000)
+        				$scope.storagetext = '无限制';
+        			else if($scope.storagemin == $scope.storagemax) {
+        				$scope.storagetext = ''+$scope.storagemax+'(吨)';
+        			}
+        			else {
+        				$scope.storagetext = ""+$scope.storagemin+' ~ '+$scope.storagemax+'(吨)';     				
+        			}
+        			console.log($scope.storagetext);
+        		})
+    		}
+		});
+	}
 	function getMainColor() {
 		$("#maincolor").spectrum('get')._r
 	}
@@ -107,7 +156,7 @@
 
 
 	initColorView();
-
+	initRangeView();
 	}
 })()
 

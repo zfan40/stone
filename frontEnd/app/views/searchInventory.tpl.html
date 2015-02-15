@@ -1,13 +1,13 @@
-<nav-bar></nav-bar>
+<nav-bar highlight=4></nav-bar>
 <div class = "form-inline container searchInvenotry">
 <!-- input-group margin-bottom-sm-->
-	<div class = "row">
-		<div class="col-xs-6 col-sm-4 col-md-2">
+	<div class = "row" style="background-color:#80D8CF;padding:10px 0px; border-top-left-radius:5px;border-top-right-radius:5px;">
+		<div class="col-xs-6 col-sm-4 col-md-2" style="height:34px; border-radius:4px;">
 		编号</br><input ng-model="stoneCode" ngclass="form-control" type="text" id="stone_code">
 		</div>
 
 		<div class="col-xs-6 col-sm-4 col-md-2">
-		商品名</br><input ng-model="stoneName" ngclass="form-control" type="text" id="stone_code">
+		商品名</br><input ng-model="stoneName" ngclass="form-control" type="text" id="stone_name">
 		</div>
 
 		<div class="col-xs-6 col-sm-4 col-md-2">
@@ -18,28 +18,26 @@
 		纹理颜色</br><input ng-model="veinColor" class="form-control" type="text" id="deccolor">	
 		</div>
 
-		<div class="col-xs-6 col-sm-4 col-md-2">
+		<div class="col-xs-6 col-sm-4 col-md-2" style="margin-top:-6px;">
 		  <label for="originprovince">产地</label></br>
 		  <select ng-model="originLocation" ng-options="loc for loc in originOptions" class="form-control" id="originprovince"></select>
 		</div>
-		<div class="col-xs-6 col-sm-4 col-md-2">
+		<div class="col-xs-6 col-sm-4 col-md-2" style="margin-top:-6px;">
 		<label for="senderprovince">发货地</label></br>
 		  <select ng-model="shipLocation" ng-options="loc for loc in shipOptions" class="form-control" id="senderprovince"></select>
 		</div>
-	</div>
-
-
-	<div class="row">
-
-
-
-
+</div>
+<div class="row" style="background-color:#80D8CF;padding:10px 0px; border-bottom-left-radius:5px;border-bottom-right-radius:5px;" >
 		<div class="col-xs-6 col-sm-4 col-md-2">
-		价格区间</br><input class="range" ng-model="pricemin" type="text">~<input class="range" ng-model="pricemax" type="text">	
+		价格:&nbsp;<span>{{pricetext}}</span></br>
+		<div id="pricerange" style="margin:10px"></div>
+		<!-- <input class="range" ng-model="pricemin" type="text">~<input class="range" ng-model="pricemax" type="text">	 -->
 		</div>
 
 		<div class="col-xs-6 col-sm-4 col-md-2">
-		库存量</br><input class="range" ng-model="storagemin" type="text">~<input class="range" ng-model="storagemax" type="text">	
+		库存量:&nbsp;<span>{{storagetext}}</span></br>
+		<div id="storagerange" style="margin:10px"></div>
+		<!-- <input class="range" ng-model="storagemin" type="text">~<input class="range" ng-model="storagemax" type="text">	 -->
 		</div>
 		<div class="col-xs-6 col-sm-4 col-md-2">
 		<label for="senderprovince">规格</label></br>
@@ -47,7 +45,7 @@
 		</div>
 	</div>
 
-	<div class="container">
+	<div class="row" style="margin-top:45px;">
 	<div class="col-xs-12">
 		<table class="table table-bordered inventory-table">
 			<tr>
