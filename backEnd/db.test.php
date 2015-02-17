@@ -4,7 +4,7 @@ include_once('common.lib.php');
 
 $mod = new InventoryModel();
 $condition = array(
-	'mainColor' => [20, 20, 30]
+	'price' => [null, null] 
 );
 $res = $mod->search($condition, 'sendResponse');
 

@@ -6,7 +6,7 @@ function sendResponse($data, $errorcode=0, $msg='') {
 	$res = array(
 		'errorcode' => $errorcode,
 		'msg' => $msg,
-		'data' => $data
+		'data' => empty($data) ? [] : $data
 	);
 
 	header('Content-Type: application/json; charset=utf-8');
