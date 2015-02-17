@@ -11,7 +11,7 @@
 		$scope.stoneCode;
 		$scope.stoneName;
 		$scope.stoneCategory;
-			$scope.categoryOptions = ['哎呀','好意思','不好意思'];
+			$scope.categoryOptions = ['大理石','花岗岩'];
 		$scope.originLocation;
 			$scope.originOptions = ['北京','上海','深圳','东莞'];
 		$scope.mainColor=undefined;

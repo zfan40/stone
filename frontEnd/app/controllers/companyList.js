@@ -1,3 +1,4 @@
+//change var name according to new naming convention
 (function() {
 	'use strict';
 	var app = angular.module("app");

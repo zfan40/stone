@@ -27,6 +27,7 @@
 }
 
 /*nav bar*/
+li .
 @media only screen and (max-width : 768px) {
     .navbar-brand {
      float:none !important;
@@ -205,7 +206,7 @@ vertical-align: middle;
 article.category-artists {
 	height:450px;
 	position:relative;
-	background-color: #F27EAA;
+	background-color: #F2EADE;
 }
 
 article .background {
@@ -223,11 +224,11 @@ pointer-events: none;
 	background-color: #ffffff;
 }
 .category-artists .overlay {
-background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, rgba(255,255,255,0)), color-stop(50%, #F27EAA), color-stop(100%, #F27EAA));
-background: -webkit-linear-gradient(rgba(255,255,255,0),#F27EAA,#F27EAA);
-background: -moz-linear-gradient(rgba(255,255,255,0),#F27EAA,#F27EAA);
-background: -o-linear-gradient(rgba(255,255,255,0),#F27EAA,#F27EAA);
-background: linear-gradient(rgba(255,255,255,0),#F27EAA,#F27EAA);
+background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, rgba(255,255,255,0)), color-stop(50%, #F2EADE), color-stop(100%, #F2EADE));
+background: -webkit-linear-gradient(rgba(255,255,255,0),#F2EADE,#F2EADE);
+background: -moz-linear-gradient(rgba(255,255,255,0),#F2EADE,#F2EADE);
+background: -o-linear-gradient(rgba(255,255,255,0),#F2EADE,#F2EADE);
+background: linear-gradient(rgba(255,255,255,0),#F2EADE,#F2EADE);
 position: absolute;
 bottom: 0;
 left: 0;
@@ -259,11 +260,11 @@ pointer-events: none;
 	margin-top: 0em;
 }
 
-
+/*post category-news*/
 article.category-news {
 	height:450px;
 	position:relative;
-	background-color: #36c258;
+	background-color: #945351;
 }
 
 .category-news .article-image {
@@ -273,11 +274,11 @@ article.category-news {
 	background-color: #ffffff;
 }
 .category-news .overlay {
-background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, rgba(255,255,255,0)), color-stop(50%, #36c258), color-stop(100%, #36c258));
-background: -webkit-linear-gradient(rgba(255,255,255,0),#36c258,#36c258);
-background: -moz-linear-gradient(rgba(255,255,255,0),#36c258,#36c258);
-background: -o-linear-gradient(rgba(255,255,255,0),#36c258,#36c258);
-background: linear-gradient(rgba(255,255,255,0),#36c258,#36c258);
+background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, rgba(255,255,255,0)), color-stop(50%, #945351), color-stop(100%, #945351));
+background: -webkit-linear-gradient(rgba(255,255,255,0),#945351,#945351);
+background: -moz-linear-gradient(rgba(255,255,255,0),#945351,#945351);
+background: -o-linear-gradient(rgba(255,255,255,0),#945351,#945351);
+background: linear-gradient(rgba(255,255,255,0),#945351,#945351);
 position: absolute;
 bottom: 0;
 left: 0;
@@ -289,29 +290,31 @@ pointer-events: none;
 .category-news .posttype {
 	font-size: 1.1em;
 	margin-top: 1.5em;
-	color: #7600e2;
+	color: #E5F9F8;
 }
 .category-news .posttitle {
 	font-size:1.4em;
 	font-weight: 600;
 	margin-top: 1.5em;
+	color:#E5F9F8;
 }
 .category-news .postabstract {
 	font-size:1.1em;
 	font-weight: 100;
 	margin-top: 1.5em;
-	color: #000000;
+	color: #E5F9F8;
 }
 .category-news .postdate {
 	font-size:1.1em;
 	font-style: italic;
-	color:#000000;
+	color:#E5F9F8;
 	margin-top: 0em;
 }
+
 article.category-stones {
 	height:450px;
 	position:relative;
-	background-color: #c27b36;
+	background-color: #80D8CF;
 }
 .category-stones .article-image {
 	position:relative;
@@ -320,11 +323,11 @@ article.category-stones {
 	background-color: #ffffff;
 }
 .category-stones .overlay {
-background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, rgba(255,255,255,0)), color-stop(50%, #c27b36), color-stop(100%, #c27b36));
-background: -webkit-linear-gradient(rgba(255,255,255,0),#c27b36,#c27b36);
-background: -moz-linear-gradient(rgba(255,255,255,0),#c27b36,#c27b36);
-background: -o-linear-gradient(rgba(255,255,255,0),#c27b36,#c27b36);
-background: linear-gradient(rgba(255,255,255,0),#c27b36,#c27b36);
+background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, rgba(255,255,255,0)), color-stop(50%, #80D8CF), color-stop(100%, #80D8CF));
+background: -webkit-linear-gradient(rgba(255,255,255,0),#80D8CF,#80D8CF);
+background: -moz-linear-gradient(rgba(255,255,255,0),#80D8CF,#80D8CF);
+background: -o-linear-gradient(rgba(255,255,255,0),#80D8CF,#80D8CF);
+background: linear-gradient(rgba(255,255,255,0),#80D8CF,#80D8CF);
 position: absolute;
 bottom: 0;
 left: 0;
