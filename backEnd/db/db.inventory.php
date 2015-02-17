@@ -14,7 +14,7 @@ class InventoryModel extends Model {
 	 * @param $companyId  公司ID
 	 * @param $count      要获取多少行数据
 	 */
-	 public function getList($companyId, $count=20) {
+	public function getList($companyId, $count=20) {
 	 	$conditionStr = $this->getConditionStr(array('companyId'=>$companyId));
 		$sql = "select inventoryId, stoneBoardImageUrl, st.fullName,
 			stoneCategory, shipLocation, standard, storage, price, stoneCode
@@ -24,9 +24,6 @@ class InventoryModel extends Model {
 		$res = $records->fetch_all(MYSQLI_ASSOC);
 		foreach($res as $k => $row) {
 			$urls = json_decode($row['stoneBoardImageUrl'], true);
-			//var_dump($row['stoneBoardImageUrl']);
-			//var_dump($urls);
-			//die('123');
 			$res[$k]['stoneImageUrl'] = is_array($urls) && isset($urls[0]) && isset($urls[0]['image']) ? $urls[0]['image'] : '';
 			unset($res[$k]['stoneBoardImageUrl']);
 		}
@@ -34,8 +31,141 @@ class InventoryModel extends Model {
 	}
 
 	/**
-	 * 
+	 * 搜索存货列表
+	 * @param $condition  搜索条件
+	 * @param $count      要获取多少行数据
 	 */
+	public function search($condition, $errorFn, $count=20) {
+		// 这个搜索条件比较复杂
+		$conditionCount = 0;
+		$conditionArr = array();
+		if (isset($condition['stoneCode'])) {
+			$conditionArr[] = "stoneCode like '%{$condition['stoneCode']}%'";
+			$conditionCount++;
+		}
+		if (isset($condition['name'])) {
+			$conditionArr[] = "(st.fullName like '%{$condition['name']}%' or st.nickName like '%{$condition['name']}%')";
+			$conditionCount++;
+		}
+		if (isset($condition['stoneCategory'])) {
+			$conditionArr[] = "stoneCategory = '{$condition['stoneCategory']}'";
+			$conditionCount++;
+		}
+		if (isset($condition['originLocation'])) {
+			$conditionArr[] = "originLocation = '{$condition['originLocation']}'";
+			$conditionCount++;
+		}
+		if (isset($condition['mainColor'])) { // 颜色需在查询之后再过滤
+			if ( !(isset($condition['mainColor'][0]) && 
+				isset($condition['mainColor'][1]) &&
+				isset($condition['mainColor'][2]) ) )
+				$errorFn(null, -1, 'mainColor format error: must be [r, g, b]');
+			$r = $condition['mainColor'][0];
+			$g = $condition['mainColor'][1];
+			$b = $condition['mainColor'][2];
+			if (!is_int($r) || !is_int($g) || !is_int($b)) 
+				$errorFn(null, -1, 'mainColor format error: not numeric');
+			$conditionCount++;
+		}
+		if (isset($condition['veinColor'])) { // 颜色需在查询之后再过滤
+			if ( !(isset($condition['veinColor'][0]) && 
+				isset($condition['veinColor'][1]) &&
+				isset($condition['veinColor'][2]) ) )
+				$errorFn(null, -1, 'veinColor format error: must be [r, g, b]');
+			$r = $condition['veinColor'][0];
+			$g = $condition['veinColor'][1];
+			$b = $condition['veinColor'][2];
+			if (!is_int($r) || !is_int($g) || !is_int($b)) 
+				$errorFn(null, -1, 'veinColor format error: not numeric');
+			$conditionCount++;
+		}
+		if (isset($condition['shipLocation'])) {
+			if ( !(isset($condition['shipLocation'][0]) && isset($condition['shipLocation'][1])) )
+				$errorFn(null, -1, 'shipLocation format error, must be ["nation", "state"]');
+			$nation = $condition['shipLocation'][0];
+			$state = $condition['shipLocation'][1];
+			$conditionArr[] = "nation=$nation and state=$state";
+			$conditionCount++;
+		}
+		if (isset($condition['standard'])) {
+			$conditionArr[] = "standard={$condition['standard']}";
+			$conditionCount++;
+		}
+		if (isset($condition['storage'])) {
+			if ( !(isset($condition['storage'][0]) && isset($condition['storage'][1])) )
+				$errorFn(null, -1, 'storage format error, must be [from, to]');
+			$from = $condition['storage'][0];
+			$to = $condition['storage'][1];
+			if ( !is_numeric($from) || !is_numeric($to) )
+				$errorFn(null, -1, 'storage format error: not numeric');
+			$conditionArr[] = "(storage >= $from && storage <= $to)";
+			$conditionCount++;
+		}
+		if (isset($condition['price'])) {
+			if ( !(isset($condition['price'][0]) && isset($condition['price'][1])) )
+				$errorFn(null, -1, 'price format error, must be [from, to]');
+			$from = $condition['price'][0];
+			$to = $condition['price'][1];
+			if ( !is_numeric($from) || !is_numeric($to) )
+				$errorFn(null, -1, 'price format error: not numeric');
+			$conditionArr[] = "(price >= $from && price <= $to)";
+			$conditionCount++;
+		}
+		if ($conditionCount==0) {
+			$errorFn(null, -1, 'no condition specified');
+		}
+		$conditionStr = implode(' and ', $conditionArr);
+		$page = isset($condition['page']) ? $condition['page'] : 1;
+		if (!is_int($page) || $page <= 0)
+			$page = 1;
+		$start = ($page-1) * $count;
+
+		// 开始查询
+		$sql = "select inventoryId, stoneBoardImageUrl, st.fullName,
+			stoneCategory, shipLocation, standard, storage, price, stoneCode,
+			mainColor, veinColor
+			from {$this->tablename} inv, stone st 
+			where inv.stoneId=st.stoneId and {$conditionStr} limit {$start}, {$count}";
+		var_dump($sql);
+		$records = $this->conn->query($sql);
+		$res = $records->fetch_all(MYSQLI_ASSOC);
+		$finalRes = array();
+		$thres = 20; // 颜色按照这个误差进行搜索
+		foreach($res as $k => $row) {
+			$urls = json_decode($row['stoneBoardImageUrl'], true);
+			$row['stoneImageUrl'] = is_array($urls) && isset($urls[0]) && isset($urls[0]['image']) ? $urls[0]['image'] : '';
+			unset($row['stoneBoardImageUrl']);
+			unset($row['mainColor']);
+			unset($row['veinColor']);
+			// 查询后的过滤
+			if (isset($condition['mainColor'])) {
+				$conR = (int)$condition['mainColor'][0];
+				$conG = (int)$condition['mainColor'][1];
+				$conB = (int)$condition['mainColor'][2];
+				$color = explode(',', $row['mainColor']);
+				$r=$color[0]; $g=$color[1]; $b=$color[2];
+				if ($r>=$conR-$thres && $r<=$conR+$thres &&
+					$g>=$conG-$thres && $g<=$conG+$thres &&
+					$b>=$conB-$thres && $b<=$conB+$thres)
+					$finalRes[] = $row;
+			}
+			if (isset($condition['veinColor'])) {
+				$conR = (int)$condition['veinColor'][0];
+				$conG = (int)$condition['veinColor'][1];
+				$conB = (int)$condition['veinColor'][2];
+				$color = explode(',', $row['veinColor']);
+				$r=$color[0]; $g=$color[1]; $b=$color[2];
+				if ($r>=$conR-$thres && $r<=$conR+$thres &&
+					$g>=$conG-$thres && $g<=$conG+$thres &&
+					$b>=$conB-$thres && $b<=$conB+$thres)
+					$finalRes[] = $row;
+			}
+			else {
+				$finalRes[] = $row;
+			}
+		}
+		return $res;
+	}
 
 	/**
 	 * 获取一个存货信息

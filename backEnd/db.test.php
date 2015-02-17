@@ -1,8 +1,12 @@
 <?php
 include_once('db/db.inventory.php');
+include_once('common.lib.php');
 
 $mod = new InventoryModel();
-$res = $mod->getById(1);
+$condition = array(
+	'mainColor' => [20, 20, 30]
+);
+$res = $mod->search($condition, 'sendResponse');
 
 //var_dump($res);
 header('Content-Type: text/plain; charset=utf-8');
