@@ -1,23 +1,14 @@
 <?php
 include_once('db/db.inventory.php');
-include_once('db/db.case.php');
 include_once('common.lib.php');
 
-$inventoryId = _Get('inventoryId');
-if (empty($inventoryId)) {
-	sendResponse(null, -1, 'param inventoryId must not be empty');
-}
+$mod = new InventoryModel();
+$condition = $_GET;
+$res = $mod->search($condition, 'sendResponse');
 
-$inventoryMod = new InventoryModel();
-$inventory = $inventoryMod->getById($inventoryId);
+//var_dump($res);
+//header('Content-Type: text/plain; charset=utf-8');
 
-if(!empty($inventory)) {
-	$caseMod = new CaseModel();
-	$cases = $caseMod->getByInventoryId($inventoryId);
-
-	$inventory['cases'] = $cases;
-}
-
-
-sendResponse($inventory);
+//echo json_encode($res, JSON_PRETTY_PRINT);
+sendResponse($res);
 ?>

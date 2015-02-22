@@ -2,7 +2,7 @@
 include_once('db.php');
 
 //
-// 公司表
+// 案例表
 //
 class CaseModel extends Model {
 	public function __construct() {
@@ -10,7 +10,7 @@ class CaseModel extends Model {
 	}
 
 	/**
-	 * 获取一个公司信息
+	 * 获取一个公司的案例信息
 	 * @param $condition  key-value数组，要搜索的条件
 	 * @param $keys       要获取哪些列 
 	 * @param $count      要获取多少行数据

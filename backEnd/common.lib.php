@@ -14,21 +14,21 @@ function sendResponse($data, $errorcode=0, $msg='') {
 	die(json_encode($res, MY_JSON_OPTIONS));
 }
 
-function _Get($key) {
+function _Get($key, $default=null) {
 	if (empty($key) || !isset($_GET[$key]))
-		return "";
+		return $default;
 	return $_GET[$key];
 }
 
-function _Post($key) {
+function _Post($key, $default=null) {
 	if (empty($key) || !isset($_POST[$key]))
-		return "";
+		return $default;
 	return $_POST[$key];
 }
 
-function _Req($key) {
+function _Req($key, $default=null) {
 	if (empty($key) || !isset($_REQUEST[$key]))
-		return "";
+		return $default;
 	return $_REQUEST[$key];
 }
 ?>

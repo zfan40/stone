@@ -29,13 +29,21 @@ class InventoryModel extends Model {
 		}
 		return $res;
 	}
+	
+	static private function errorFn($data=null, $errorCode=-1, $msg='') {
+	}
 
 	/**
 	 * 搜索存货列表
 	 * @param $condition  搜索条件
 	 * @param $count      要获取多少行数据
 	 */
-	public function search($condition, $errorFn, $count=20) {
+	public function search($condition, $errorFn='sendMessage', $count=20) {
+		if (is_array($errorFn))
+			return parent::search($condition, $errorFn, $count);
+		//die('123');
+		if (!function_exists($errorFn))
+			$errorFn = function($data=null, $errorCode=-1, $msg='') {};
 		// 这个搜索条件比较复杂
 		$conditionCount = 0;
 		$conditionArr = array();
@@ -139,7 +147,7 @@ class InventoryModel extends Model {
 			mainColor, veinColor
 			from {$this->tablename} inv, stone st 
 			where inv.stoneId=st.stoneId {$conditionStr} limit {$start}, {$count}";
-		var_dump($sql);
+		//var_dump($sql);
 		$records = $this->conn->query($sql);// or die($this->conn->error);
 		$res = $records->fetch_all(MYSQLI_ASSOC);
 		$finalRes = array();
@@ -170,7 +178,7 @@ class InventoryModel extends Model {
 				$conG = (int)$condition['veinColor'][1];
 				$conB = (int)$condition['veinColor'][2];
 				$color = explode(',', $row['veinColor']);
-				$r=$color[0]; $g=$color[1]; $b=$color[2];
+				$r=(int)$color[0]; $g=(int)$color[1]; $b=(int)$color[2];
 				if ($r>=$conR-$thres && $r<=$conR+$thres &&
 					$g>=$conG-$thres && $g<=$conG+$thres &&
 					$b>=$conB-$thres && $b<=$conB+$thres)
@@ -186,9 +194,14 @@ class InventoryModel extends Model {
 				unset($row['stoneBoardImageUrl']);
 				//unset($row['mainColor']);
 				//unset($row['veinColor']);
+				$color = explode(',', $row['mainColor']);
+				$row['mainColor'] = array( (int)$color[0], (int)$color[1], (int)$color[2] );
+				$color = explode(',', $row['veinColor']);
+				$row['veinColor'] = array( (int)$color[0], (int)$color[1], (int)$color[2] );
 				$finalRes[] = $row;
 			}
 		}
+		//var_dump($finalRes);
 		return $finalRes;
 	}
 
@@ -204,12 +217,21 @@ class InventoryModel extends Model {
 		$res = $this->searchOne(array('inventoryId'=>$inventoryId), $keys);
 		//var_dump($res);
 		if (is_array($res) && !empty($res)) {
-			$res['mainColor'] = explode(',', $res['mainColor']);
-			$res['veinColor'] = explode(',', $res['veinColor']);
+			$color = explode(',', $res['mainColor']);
+			$res['mainColor'] = array( (int)$color[0], (int)$color[1], (int)$color[2] );
+			$color = explode(',', $res['veinColor']);
+			$res['veinColor'] = array( (int)$color[0], (int)$color[1], (int)$color[2] );
 			$res['stoneBoardImageUrl'] = json_decode($res['stoneBoardImageUrl'], true);
 			$res['stoneProductImageUrl'] = json_decode($res['stoneProductImageUrl'], true);
 		}
 		return $res;
+	}
+
+	public function test() {
+		$sql = "select inventoryId, stoneId, companyId from inventory where inventoryId=1";
+		$res = $this->conn->query($sql);
+		$row = $res->fetch_array();
+		return $row;
 	}
 }
 ?>
