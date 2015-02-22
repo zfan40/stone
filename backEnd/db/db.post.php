@@ -18,9 +18,9 @@ class PostModel extends Model {
 	 	$start = ($page-1) * $count;
 	 	$sql = "select postId, postTitle, postDate, postImage, postAbstract, postType, p.postTypeId, color
 			from post p, postType pt where p.postTypeId=pt.postTypeId limit $start, $count";
-		$res = $this->conn->query($sql);
-		$rows = $res->fetch_all(MYSQLI_ASSOC);
-		return $rows;
+		$records = $this->conn->query($sql);
+		$res = $this->fetch_all($records);//$res->fetch_all(MYSQLI_ASSOC);
+		return $res;
 	 }
 }
 ?>

@@ -1,4 +1,5 @@
 <?php
+include_once('common.lib.php');
 /**
  * 封装了数据库的操作
  */
@@ -25,7 +26,9 @@ class Model {
 		if (empty($tablename)) 
 			trigger_error('Error constructing BaseModel object: $tablename must not be null!');
 		$this->tablename = $tablename;
-		$this->conn = new mysqli($this->host, $this->username, $this->password);
+		$this->conn = @new mysqli($this->host, $this->username, $this->password);
+		if ($this->conn->connect_error)
+			sendResponse(null, -1, 'cannot connect to db');
 		$this->conn->select_db($this->dbname);
 		$this->conn->set_charset('utf8');
 	}
@@ -39,7 +42,7 @@ class Model {
 		$sql = "select {$keysstr} from {$this->tablename}";
 		//var_dump($sql);
 		$records = $this->conn->query($sql) or die($this->conn->error);
-		$res = $records->fetch_all(MYSQLI_ASSOC);
+		$res = $this->fetch_all($records);//$res = $records->fetch_all(MYSQLI_ASSOC);
 		return $res;
 	}
 
@@ -55,7 +58,7 @@ class Model {
 		$sql = "select {$keysstr} from {$this->tablename} where {$conditionStr} limit 0, {$count}";
 		//die($sql);
 		$records = $this->conn->query($sql) or die($this->conn->error);
-		$res = $records->fetch_all(MYSQLI_ASSOC);
+		$res = $this->fetch_all($records);//$records->fetch_all(MYSQLI_ASSOC);
 		return $res;
 	 }
 
@@ -64,12 +67,24 @@ class Model {
 	 * @param $condition  key-value数组，要搜索的条件
 	 * @param $keys       要获取哪些列 
 	 */
-	 public function searchOne($condition, $keys=array()) {
+	public function searchOne($condition, $keys=array()) {
 	 	$res = $this->search($condition, $keys, 1);
 		if (is_array($res) && isset($res[0]))
 			$res = $res[0];
 		return $res;
-	 }
+	}
+
+	/**
+	 * mysqli::fetch_all() 这个函数似乎在某些机器上不能用，这里自己做一个
+	 * @param $records     mysqli_query或mysqli::query的返回值
+	 */
+	public function fetch_all($records) {
+		$res = array();
+		while($row = $records->fetch_assoc()) {
+			$res[] = $row;
+		}
+		return $res;
+	}
 
 	/**
 	 * Helper function, join condition array into a string in 

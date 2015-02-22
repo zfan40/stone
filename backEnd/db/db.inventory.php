@@ -21,7 +21,7 @@ class InventoryModel extends Model {
 			from {$this->tablename} inv, stone st 
 			where inv.stoneId=st.stoneId and {$conditionStr} limit 0, {$count}";
 		$records = $this->conn->query($sql);
-		$res = $records->fetch_all(MYSQLI_ASSOC);
+		$res = $this->fetch_all($records);//$records->fetch_all(MYSQLI_ASSOC);
 		foreach($res as $k => $row) {
 			$urls = json_decode($row['stoneBoardImageUrl'], true);
 			$res[$k]['stoneImageUrl'] = is_array($urls) && isset($urls[0]) && isset($urls[0]['image']) ? $urls[0]['image'] : '';
@@ -149,7 +149,7 @@ class InventoryModel extends Model {
 			where inv.stoneId=st.stoneId {$conditionStr} limit {$start}, {$count}";
 		//var_dump($sql);
 		$records = $this->conn->query($sql);// or die($this->conn->error);
-		$res = $records->fetch_all(MYSQLI_ASSOC);
+		$res = $this->fetch_all($records);//$records->fetch_all(MYSQLI_ASSOC);
 		$finalRes = array();
 		$thres = 20; // 颜色按照这个误差进行搜索
 		foreach($res as $k => $row) {
