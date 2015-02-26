@@ -18,7 +18,7 @@ class InventoryModel extends Model {
 	 	$conditionStr = $this->getConditionStr(array('companyId'=>$companyId));
 		$sql = "select inventoryId, stoneBoardImageUrl, st.fullName,
 			stoneCategory, shipLocation, standard, storage, price, stoneCode
-			from {$this->tablename} inv, stone st 
+			from {$this->tablename} inv, stone st
 			where inv.stoneId=st.stoneId and {$conditionStr} limit 0, {$count}";
 		$records = $this->conn->query($sql);
 		$res = $this->fetch_all($records);//$records->fetch_all(MYSQLI_ASSOC);
@@ -210,7 +210,7 @@ class InventoryModel extends Model {
 	 * @param 
 	 */
 	public function getById($inventoryId) {
-		$keys = array('inventoryId', 'stoneId', 'companyId',
+		/*$keys = array('inventoryId', 'stoneId', 'companyId',
 			'mainColor', 'veinColor', 'shipLocation', 
 			'stoneBoardImageUrl', 'stoneProductImageUrl',
 			'standard', 'storage', 'price');
@@ -221,6 +221,20 @@ class InventoryModel extends Model {
 			$res['mainColor'] = array( (int)$color[0], (int)$color[1], (int)$color[2] );
 			$color = explode(',', $res['veinColor']);
 			$res['veinColor'] = array( (int)$color[0], (int)$color[1], (int)$color[2] );
+			$res['stoneBoardImageUrl'] = json_decode($res['stoneBoardImageUrl'], true);
+			$res['stoneProductImageUrl'] = json_decode($res['stoneProductImageUrl'], true);
+		}*/
+		$sql = "select inv.inventoryId, inv.fullName, st.fullName as generalName, 
+			st.description as generalDescription, stoneCategory,
+			com.cnFullName as companyName, com.cnAlias as companyCnAlias,
+			com.enAlias as companyEnAlias, originLocation,
+			shipLocation, price, stoneBoardImageUrl, stoneProductImageUrl
+			from {$this->tablename} inv, stone st, company com
+			where inv.stoneId=st.stoneId and inv.companyId=com.companyId
+				and inv.inventoryId={$inventoryId}";
+		$records = $this->conn->query($sql) or die($this->conn->error);
+		$res = $records->fetch_assoc();
+		if (is_array($res) && !empty($res)) {
 			$res['stoneBoardImageUrl'] = json_decode($res['stoneBoardImageUrl'], true);
 			$res['stoneProductImageUrl'] = json_decode($res['stoneProductImageUrl'], true);
 		}

@@ -10,15 +10,25 @@ class CaseModel extends Model {
 	}
 
 	/**
-	 * 获取一个公司的案例信息
-	 * @param $condition  key-value数组，要搜索的条件
-	 * @param $keys       要获取哪些列 
-	 * @param $count      要获取多少行数据
+	 * 获取一个存货的案例信息
+	 * @param $inventoryId  存货ID
+	 * @param $count        要获取多少行数据
 	 */
-	 public function getByInventoryId($inventoryId, $count=20) {
+	public function getByInventoryId($inventoryId, $count=20) {
 		$keys = array('title', 'description as text', 'imageLarge as image');
 		$condition = array('inventoryId'=>$inventoryId);
 		return $this->search($condition, $keys, $count);
-	 }
+	}
+
+	/**
+	 * 获取一个公司的案例信息
+	 * @param $companyId  公司ID
+	 * @param $count        要获取多少行数据
+	 */
+	public function getByCompanyId($companyId, $count=20) {
+		$keys = array('title as text', 'imageLarge as image');
+		$condition = array('companyId'=>$companyId);
+		return $this->search($condition, $keys, $count);
+	}
 }
 ?>
