@@ -13,7 +13,6 @@
     "commit": "e9cfd653be52cc5e6fa41b37b5a0c9caac693de2"
   },
   "_source": "git://github.com/gustavohenke/jquery-ui-bootstrap.git",
-  "_target": "~0.2.5",
-  "_originalSource": "jquery-ui-bootstrap",
-  "_direct": true
+  "_target": "*",
+  "_originalSource": "jquery-ui-bootstrap"
 }

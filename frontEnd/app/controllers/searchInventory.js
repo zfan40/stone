@@ -2,17 +2,17 @@
 	'use strict';
 	var app = angular.module("app");
 	var controllerID = "SearchInventoryController";
-	app.controller(controllerID,["$scope","$location",searchInventory]);
+	app.controller(controllerID,["$scope","$location","datacontext",searchInventory]);
 
 
-	function searchInventory($scope,$location) {
+	function searchInventory($scope,$location,datacontext) {
 
 
-		$scope.stoneCode;
-		$scope.stoneName;
-		$scope.stoneCategory;
+		$scope.stoneCode = undefined;
+		$scope.stoneName = '';
+		$scope.stoneCategory = undefined;
 			$scope.categoryOptions = ['大理石','花岗岩'];
-		$scope.originLocation;
+		$scope.originLocation = undefined;
 			$scope.originOptions = ['北京','上海','深圳','东莞'];
 		$scope.mainColor=undefined;
 		$scope.veinColor=undefined;
@@ -28,53 +28,137 @@
 		$scope.pricetext = '无限制';
 		$scope.page = 1;
 
-		//returned example
-		$scope.inventories = [
-			{
-				inventoryId:1,
-				stoneImageUrl:'images/board/1.jpg',
-				fullName:'戈壁彩',
-				stoneCategory:'大理石',
-				shipLocation:'新疆',
-				standard:'50*2',
-				storage:'5吨',
-				price:'20w',
-				stoneCode:'2B001'
-			},
-			{
-				inventoryId:2,
-				stoneImageUrl:'images/board/2.jpg',
-				fullName:'黄金钻',
-				stoneCategory:'花岗岩',
-				shipLocation:'新疆',
-				standard:'50*2',
-				storage:'5吨',
-				price:'10w',
-				stoneCode:'NB001'
-			},
-			{
-				inventoryId:3,
-				stoneImageUrl:'images/board/3.jpg',
-				fullName:'蜘蛛玉',
-				stoneCategory:'大理石',
-				shipLocation:'新疆',
-				standard:'50*3',
-				storage:'100吨',
-				price:'30w',
-				stoneCode:'NB007'
-			},
-			{
-				inventoryId:4,
-				stoneImageUrl:'images/board/4.jpg',
-				fullName:'银貂',
-				stoneCategory:'大理石',
-				shipLocation:'新疆',
-				standard:'50*2',
-				storage:'50吨',
-				price:'100w',
-				stoneCode:'SB001'
+		//functions declarations
+		$scope.reset = reset;
+		$scope.apply = apply;
+
+		function reset() {		
+			$scope.stoneCode = undefined;
+			$scope.stoneName = '';
+			$scope.stoneCategory = undefined;
+			$scope.originLocation = undefined;
+			$scope.mainColor = [80,100,90];
+			console.log($scope.mainColor);
+			$scope.veinColor = [];
+			$scope.shipLocation = undefined;
+			$scope.standard = undefined;
+			$scope.storagemin=0;
+			$scope.storagemax=1000;
+			$scope.pricemin=0;
+			$scope.pricemax=100;
+			$scope.page = 1;
+
+			// $('.sp-clear').click();
+			// initColorView();
+			initRangeView();
+
+			$scope.pricetext = '无限制';
+			$scope.storagetext = '无限制';
+			console.log("all filters are reset");
+			console.log($scope.mainColor);
+		}
+
+		function apply() {
+			var params = {
+				stoneCode: $scope.stoneCode,
+				name: $scope.stoneName,
+				stoneCategory: $scope.stoneCategory,
+				originLocation: $scope.originLocation,
+				mainColor: $scope.mainColor,
+				veinColor: $scope.veinColor,
+			    shipLocation: $scope.shipLocation,
+			    standard: $scope.standard,
+			    // storage: [$scope.storagemin,$scope.storagemax],
+			    // price: [$scope.pricemin, $scope.pricemax],
+			    page: undefined,
 			}
-		];
+
+			console.log("searching for the stones...with");
+			console.log(params);
+			datacontext.getSearchedInventories(params)
+				.then(function(data) {
+					var result = data.data.data;
+					if (result.length >=1)
+						$scope.found = true;
+					else 
+						$scope.found = false;
+
+					$scope.inventories = result;
+
+					// $scope.inventories = [
+					// {
+					// 	inventoryId:1,
+					// 	stoneImageUrl:'images/board/1.jpg',
+					// 	fullName:'戈壁彩',
+					// 	stoneCategory:'大理石',
+					// 	shipLocation:'新疆',
+					// 	standard:'50*2',
+					// 	storage:'5吨',
+					// 	price:'20w',
+					// 	stoneCode:'2B001'
+					// },
+					// {
+					// 	inventoryId:2,
+					// 	stoneImageUrl:'images/board/2.jpg',
+					// 	fullName:'黄金钻',
+					// 	stoneCategory:'花岗岩',
+					// 	shipLocation:'新疆',
+					// 	standard:'50*2',
+					// 	storage:'5吨',
+					// 	price:'10w',
+					// 	stoneCode:'NB001'
+					// },
+					// ]
+				});
+		}
+
+		//returned example
+		// $scope.inventories = [
+		// 	{
+		// 		inventoryId:1,
+		// 		stoneImageUrl:'images/board/1.jpg',
+		// 		fullName:'戈壁彩',
+		// 		stoneCategory:'大理石',
+		// 		shipLocation:'新疆',
+		// 		standard:'50*2',
+		// 		storage:'5吨',
+		// 		price:'20w',
+		// 		stoneCode:'2B001'
+		// 	},
+		// 	{
+		// 		inventoryId:2,
+		// 		stoneImageUrl:'images/board/2.jpg',
+		// 		fullName:'黄金钻',
+		// 		stoneCategory:'花岗岩',
+		// 		shipLocation:'新疆',
+		// 		standard:'50*2',
+		// 		storage:'5吨',
+		// 		price:'10w',
+		// 		stoneCode:'NB001'
+		// 	},
+		// 	{
+		// 		inventoryId:3,
+		// 		stoneImageUrl:'images/board/3.jpg',
+		// 		fullName:'蜘蛛玉',
+		// 		stoneCategory:'大理石',
+		// 		shipLocation:'新疆',
+		// 		standard:'50*3',
+		// 		storage:'100吨',
+		// 		price:'30w',
+		// 		stoneCode:'NB007'
+		// 	},
+		// 	{
+		// 		inventoryId:4,
+		// 		stoneImageUrl:'images/board/4.jpg',
+		// 		fullName:'银貂',
+		// 		stoneCategory:'大理石',
+		// 		shipLocation:'新疆',
+		// 		standard:'50*2',
+		// 		storage:'50吨',
+		// 		price:'100w',
+		// 		stoneCode:'SB001'
+		// 	}
+		// ];
 
 
 		
@@ -84,7 +168,10 @@
 			clickoutFiresChange: true,
 			change:function(tinycolor) { 
 				$scope.$apply(function() {
-					if (tinycolor) {$scope.mainColor = [tinycolor._r,tinycolor._g,tinycolor._b];}
+					if (tinycolor) {
+						$scope.mainColor = [parseInt(tinycolor._r),parseInt(tinycolor._g),parseInt(tinycolor._b)];
+						console.log('new mainColor is'+$scope.mainColor);
+					}
 				})
 			}
 		});
@@ -93,15 +180,19 @@
 			clickoutFiresChange: true,
 			change:function(tinycolor) { 
 				$scope.$apply(function() {
-					if (tinycolor) {$scope.veinColor = [tinycolor._r,tinycolor._g,tinycolor._b];}
+					if (tinycolor) {$scope.veinColor = [parseInt(tinycolor._r),parseInt(tinycolor._g),parseInt(tinycolor._b)];}
 				})
 			}
-		});		
+		});	
+		$(".sp-clear:eq(0)").click(function(){
+				$scope.mainColor=undefined;
+		});	
+		$(".sp-clear:eq(1)").click(function(){
+				$scope.veinColor=undefined;
+		});	
 	}
 
 	function initRangeView() {
-
-
 		$('#pricerange').slider({
     		range: true,
     		values: [0,100],
@@ -157,6 +248,7 @@
 
 	initColorView();
 	initRangeView();
+	apply();
 	}
 })()
 

@@ -4,8 +4,8 @@
 		<div class="col-xs-12 col-sm-12 col-md-9">
 			<div class="col-xs-5 col-xs-offset-1 col-sm-3 col-sm-offset-1 col-md-3 col-md-offset-1" ng-repeat="company in companies" style="border:1px solid; margin-bottom:20px">
 				<div style="position:relative;">
-					<a href="#/company/{{company.alias}}"><img ng-src={{company.logoUrl}} class="img-responsive logo"></a>
-					<p class="companybottombar">{{company.city}}, {{company.translatedAlias}}</p>
+					<a href="#/provider/{{company.enAlias}}"><img ng-src={{company.logoUrl}} class="img-responsive logo"></a>
+					<p class="companybottombar">{{company.city}}, {{company.cnAlias}}</p>
 				</div>
 				<div style="position:relative;">			
 					<p>规模: {{company.employeeAmount}}</p>
@@ -13,7 +13,7 @@
 				</div>
 
 				<div class="companylistTag">
-					<li ng-repeat="tag in company.categories">{{tag}}</span>
+					<li ng-repeat="tag in company.properties">{{tag}}</span>
 				</div>
 
 			</div>

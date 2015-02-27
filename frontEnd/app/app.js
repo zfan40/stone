@@ -16,18 +16,39 @@ angular.module('app', [
                 controller: 'LoginCtrl',
                 requireLogin: false
             })
-
             .when('/main', {
                 templateUrl: 'app/views/main.tpl.html',
                 controller: 'MainPageController',
                 requireLogin: false
             })
-            .when('/collaboration', {
-                templateUrl: 'app/views/companyList.tpl.html',
-                controller: 'CompanyListController',
+            // ---------------------------------------
+            .when('/providers', {
+                templateUrl: 'app/views/providerList.tpl.html',
+                controller: 'ProviderListController',
                 requireLogin: false
             })
-            .when('/posts', {
+            .when('/designers',{
+                templateUrl: 'app/views/designerList.tpl.html',
+                controller: 'DesignerListController',
+                requireLogin: false
+            })
+            .when('/architects',{
+                templateUrl: 'app/views/architectList.tpl.html',
+                controller: 'ArchitectListController',
+                requireLogin: false
+            }) 
+            .when('/invests',{
+                templateUrl: 'app/views/investList.tpl.html',
+                controller: 'InvestListController',
+                requireLogin: false
+            })                       
+            // ---------------------------------------
+            .when('/posts/:page', {
+                templateUrl: 'app/views/postList.tpl.html',
+                controller: 'PostListController',
+                requireLogin: false
+            })
+            .when('/posts/:postType', {
                 templateUrl: 'app/views/postList.tpl.html',
                 controller: 'PostListController',
                 requireLogin: false
@@ -38,16 +59,22 @@ angular.module('app', [
                 controller: 'SearchInventoryController',
                 requireLogin: false
             })
-            .when('/company/:companyId', {
-                templateUrl: 'app/views/company.tpl.html',
-                controller: 'ShowCompanyController',
+            .when('/provider/:providerId', {
+                templateUrl: 'app/views/provider.tpl.html',
+                controller: 'ShowProviderController',
                 requireLogin: false
             })
             .when('/inventory/:inventoryId', {
                 templateUrl: 'app/views/inventory.tpl.html',
                 controller: 'ShowInventoryController',
                 requireLogin: false
+            })
+            .when('/about', {
+                templateUrl: 'app/views/about.tpl.html',
+                controller: 'AboutController',
+                requireLogin: false
             });
+            
 
         // If the url is unrecognized go to login
         $routeProvider.otherwise({

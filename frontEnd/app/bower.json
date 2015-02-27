@@ -7,7 +7,8 @@
     "jquery": "latest",
     "bootstrap": "latest",
     "spectrum": "latest",
-    "jquery-ui-bootstrap":"latest"
+    "jquery-ui-bootstrap":"latest",
+    "skrollr":"latest"
   },
   "authors": [
     "Ziwen Fan <fanatic224@gmail.com>"

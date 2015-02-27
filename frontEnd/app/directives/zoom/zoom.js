@@ -3,9 +3,15 @@ app.controller('ZoomController', ['$scope', '$timeout', function($scope,$timeout
   //  $scope.myInterval = $scope.interval;
   // // $scope.slides = [{image:'http://placekitten.com/601/300',text:'to be no.1'},{image:'http://placekitten.com/602/300',text:'to be no.2'},{image:'http://placekitten.com/603/300',text:'to be no.3'}];
   //  $scope.slides = $scope.imageList;
-  $scope.largeUrl = $scope.imageList[0].image;
-  $scope.shit = 'myshow';
+  console.log($scope.imageList);
+  //in directives, the passed in variable wais for http request finish, so you need to watch that and then assign!!!!!!!!!!!!!!!!
+  $scope.$watch('imageList',function(v) {
+      if ($scope.imageList!=undefined)
+          $scope.largeUrl = $scope.imageList[0].image;
+      console.log($scope.largeUrl);
+  });
 
+  $scope.shit = 'myshow';
 
   function fadeInImage(index) {
       // $('.bigshow').fadeOut("slow",function(){
@@ -33,6 +39,11 @@ app.directive('zoomShow', function() {
     scope:{
   			imageList: '='					// => image-list
 
-  	}
+  	},
+    link: function (scope, element, attrs) {//this is not working, still have no idea how this link function work
+        scope.$watch('imageList',function(value) {
+          console.log('value changed');
+        })
+    }
   };
 });

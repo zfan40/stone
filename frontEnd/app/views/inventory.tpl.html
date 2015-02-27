@@ -2,20 +2,19 @@
 <div class="container">
 	<h3 class="title">基本信息</h3>
 
-	<div class = "row" style="display:table;">
+	<div class = "row" style="text-align:center;">
 
-		<div class="col-xs-12 col-sm-4" style="display:table-cell; vertical-align:middle;padding-top:25px;">
+		<div class="col-xs-12 col-sm-5 col-md-5 col-lg-5" style="vertical-align:middle;">
 			<img ng-src={{stoneBoardImageUrl[0].image}} class="img-responsive logo">
 		</div>
-		<div class="col-xs-12 col-sm-8" style="display:table-cell; vertical-align:middle;">		
-			<a href={{website}}><h3>{{translatedAlias}}</h3></a>
+		<div class="col-xs-12 col-sm-7 col-md-7 col-lg-7" style="vertical-align:middle;">		
 			<h4>{{generalName}}</h4>
 			<p>{{generalDescription}}</p>
-			<p>种类:&nbsp{{stoneCategory}}</p>
-			<p>所属公司:&nbsp{{companyName}}</p>
-			<p>价格(每吨):&nbsp{{price}}</p>
-			<p>产地:&nbsp{{originLocation}}</p>
-			<p>发货地:&nbsp{{shipLocation}}</p>
+			<p>种类:&nbsp;{{stoneCategory}}</p>
+			<p>所属公司:&nbsp;<a href="#/provider/{{companyEnAlias}}">{{companyCnAlias}}</a></p>
+			<p>价格(每吨):&nbsp;{{price}}</p>
+			<p>产地:&nbsp;{{originLocation}}</p>
+			<p>发货地:&nbsp;{{shipLocation}}</p>
 		</div>
 		<!-- <p>{{abc}}</p> -->
 	</div>

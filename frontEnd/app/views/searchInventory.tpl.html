@@ -10,11 +10,11 @@
 		商品名</br><input ng-model="stoneName" ngclass="form-control" type="text" id="stone_name">
 		</div>
 
-		<div class="col-xs-6 col-sm-4 col-md-2">
+		<div class="col-xs-6 col-sm-4 col-md-2 maincolorsection">
 		主要颜色</br><input ng-model="mainColor" class="form-control" type="text" id="maincolor">	
 		</div>
 
-		<div class="col-xs-6 col-sm-4 col-md-2">
+		<div class="col-xs-6 col-sm-4 col-md-2 veincolorsection">
 		纹理颜色</br><input ng-model="veinColor" class="form-control" type="text" id="deccolor">	
 		</div>
 
@@ -27,7 +27,7 @@
 		  <select ng-model="shipLocation" ng-options="loc for loc in shipOptions" class="form-control" id="senderprovince"></select>
 		</div>
 </div>
-<div class="row" style="background-color:#80D8CF;padding:10px 0px; border-bottom-left-radius:5px;border-bottom-right-radius:5px;" >
+<div class="row" style="background-color:#80D8CF;padding:10px 0px;" >
 		<div class="col-xs-6 col-sm-4 col-md-2">
 		价格:&nbsp;<span>{{pricetext}}</span></br>
 		<div id="pricerange" style="margin:10px"></div>
@@ -43,10 +43,16 @@
 		<label for="senderprovince">规格</label></br>
 		  <select ng-model="standard" ng-options="opt for opt in standardOptions" class="form-control" id="senderprovince"></select>
 		</div>
-	</div>
-
+</div>
+<div class="row" style="background-color:#80D8CF;padding:10px 0px; border-bottom-left-radius:5px;border-bottom-right-radius:5px;">
+	<div class="col-xs-2 col-sm-1" ><a ng-click="reset()">重置</a></div>
+	<div class="col-xs-2 col-sm-1" ><a ng-click="apply()">查找</a></div>
+</div>
 	<div class="row" style="margin-top:45px;">
-	<div class="col-xs-12">
+	<div class="col-xs-12" ng-hide="found">
+		查无此石
+	</div>
+	<div class="col-xs-12" ng-show="found">
 		<table class="table table-bordered inventory-table">
 			<tr>
 				<th>板图</th>

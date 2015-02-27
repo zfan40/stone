@@ -10,11 +10,12 @@
                 <li ng-class="{'active': highlight==1}"><a href="#/main"><i class="icon-home icon-white"></i> 主页</a></li>
                 <li class="divider-vertical"></li>
                 <li class="dropdown ng-isolate-scope" ng-class="{'active': highlight==2}">
-                  <a href="#/posts" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  <a class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     <i class="icon-eye-open icon-white"></i> 资讯 <b class="caret"></b>
                   </a>
                   <ul class="dropdown-menu">
                     <li class="disabled"><a href="#">石材交易</a></li>
+                    <li><a href="#/posts/1">综合信息</a></li>
                     <li><a href="#">石材保养</a></li>
                     <li><a href="#">石材招标</a></li>
                     <li><a href="#">展会信息</a></li>
@@ -36,9 +37,9 @@
                     <i class="icon-book icon-white"></i> 合作伙伴 <b class="caret"></b>
                   </a>
                   <ul class="dropdown-menu">
-                    <li><a href="#/collaboration">供应公司</a></li>
-                    <li><a href="#/collaboration">开发公司</a></li>
-                    <li><a href="#/collaboration">设计师</a></li>
+                    <li><a href="#/providers">供应公司</a></li>
+                    <li><a href="#/architects">开发公司</a></li>
+                    <li><a href="#/designers">设计师</a></li>
                     <li class="divider"></li>
                     <li><a href="#/invests">投资公司</a></li>
                   </ul>
@@ -46,10 +47,8 @@
                 <li class="divider-vertical"></li>
 
                 <li class="dropdown ng-isolate-scope" ng-class="{'active': highlight==6}">
-                  <a class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    <i class="icon-comment icon-white"></i> 关于我们
-                  </a>
-                </li>
+                  <a href="#/about" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <i class="icon-comment icon-white"></i> 关于我们</a></li>
                 <li class="divider-vertical"></li>
 
               </ul>
