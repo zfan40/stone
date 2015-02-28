@@ -37,9 +37,8 @@
 			$scope.stoneName = '';
 			$scope.stoneCategory = undefined;
 			$scope.originLocation = undefined;
-			$scope.mainColor = [80,100,90];
-			console.log($scope.mainColor);
-			$scope.veinColor = [];
+			$scope.mainColor = undefined;
+			$scope.veinColor = undefined;
 			$scope.shipLocation = undefined;
 			$scope.standard = undefined;
 			$scope.storagemin=0;
@@ -64,8 +63,8 @@
 				name: $scope.stoneName,
 				stoneCategory: $scope.stoneCategory,
 				originLocation: $scope.originLocation,
-				mainColor: $scope.mainColor,
-				veinColor: $scope.veinColor,
+				mainColor: JSON.stringify($scope.mainColor),
+				veinColor: JSON.stringify($scope.veinColor),
 			    shipLocation: $scope.shipLocation,
 			    standard: $scope.standard,
 			    // storage: [$scope.storagemin,$scope.storagemax],
