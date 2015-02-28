@@ -4,6 +4,7 @@ include_once('common.lib.php');
 
 $mod = new InventoryModel();
 $condition = $_GET;
+//var_dump($_GET);
 $res = $mod->search($condition, 'sendResponse');
 
 //var_dump($res);

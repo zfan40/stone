@@ -64,27 +64,23 @@ class InventoryModel extends Model {
 			$conditionCount++;
 		}
 		if (isset($condition['mainColor'])) { // 颜色需在查询之后再过滤
-			if ( !(isset($condition['mainColor'][0]) && 
-				isset($condition['mainColor'][1]) &&
-				isset($condition['mainColor'][2]) ) )
+			$color = json_decode($condition['mainColor']);
+			if ( !is_array($color) || count($color)!=3 )
 				$errorFn(null, -1, 'mainColor format error: must be [r, g, b]');
-			$r = $condition['mainColor'][0];
-			$g = $condition['mainColor'][1];
-			$b = $condition['mainColor'][2];
+			$r = (int)$color[0]; $g = (int)$color[1]; $b = (int)$color[2];
 			if (!is_int($r) || !is_int($g) || !is_int($b)) 
 				$errorFn(null, -1, 'mainColor format error: not numeric');
+			$condition['mainColor'] = $color;
 			$conditionCount++;
 		}
 		if (isset($condition['veinColor'])) { // 颜色需在查询之后再过滤
-			if ( !(isset($condition['veinColor'][0]) && 
-				isset($condition['veinColor'][1]) &&
-				isset($condition['veinColor'][2]) ) )
+			$color = json_decode($condition['veinColor']);
+			if ( !is_array($color) || count($color)!=3 )
 				$errorFn(null, -1, 'veinColor format error: must be [r, g, b]');
-			$r = $condition['veinColor'][0];
-			$g = $condition['veinColor'][1];
-			$b = $condition['veinColor'][2];
+			$r = (int)$color[0]; $g = (int)$color[1]; $b = (int)$color[2];
 			if (!is_int($r) || !is_int($g) || !is_int($b)) 
 				$errorFn(null, -1, 'veinColor format error: not numeric');
+			$condition['veinColor'] = $color;
 			$conditionCount++;
 		}
 		if (isset($condition['shipLocation'])) {
@@ -100,10 +96,10 @@ class InventoryModel extends Model {
 			$conditionCount++;
 		}
 		if (isset($condition['storage'])) {
-			if ( !array_key_exists(0, $condition['storage']) || !array_key_exists(1, $condition['storage']) )
+			$range = json_decode($condition['storage']);
+			if ( !is_array($range) || count($range)!=2 )
 				$errorFn(null, -1, 'storage format error, must be [from, to]');
-			$from = $condition['storage'][0];
-			$to = $condition['storage'][1];
+			$from = $range[0]; $to = $range[1];
 			if ( !($from==null || is_numeric($from)) || !($to==null || is_numeric($to)) )
 				$errorFn(null, -1, 'storage format error: value must be null or number');
 			if ($from==null && $to==null)
@@ -115,10 +111,10 @@ class InventoryModel extends Model {
 			$conditionCount++;
 		}
 		if (isset($condition['price'])) {
-			if ( !array_key_exists(0, $condition['price']) || !array_key_exists(1, $condition['price']) )
+			$range = json_decode($condition['price']);
+			if ( !is_array($range) || count($range)!=2 )
 				$errorFn(null, -1, 'price format error, must be [from, to]');
-			$from = $condition['price'][0];
-			$to = $condition['price'][1];
+			$from = $range[0]; $to = $range[1];
 			if ( !($from==null || is_numeric($from)) || !($to==null || is_numeric($to)) )
 				$errorFn(null, -1, 'price format error: value must be null or number');
 			if ($from==null && $to==null)
